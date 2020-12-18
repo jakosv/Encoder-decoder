@@ -1,0 +1,35 @@
+CC = gcc
+CFLAGS = -std=c99
+LDFLAGS = -L. -lcoder -lstr
+
+.PHONY: all clean
+
+all: decoder encoder 
+
+decoder: libcoder.so libstr.so decoder.o
+	$(CC) decoder.o $(LDFLAGS) -o decoder
+
+encoder: libcoder.so libstr.so encoder.o
+	$(CC) encoder.o $(LDFLAGS) -o encoder
+
+libcoder.so: coder.o libstr.so 
+	$(CC) coder.o -L. -lstr -shared -o libcoder.so
+
+libstr.so: str.o
+	$(CC) str.o -shared -o libstr.so
+
+str.o:
+	$(CC) -c -fPIC str.c $(CFLAGS)
+
+coder.o:
+	$(CC) -c -fPIC coder.c $(CFLAGS)
+
+encoder.o:
+	$(CC) -c encoder.c $(CFLAGS)
+
+decoder.o:
+	$(CC) -c decoder.c $(CFLAGS)
+
+clean:
+	rm -rf *.o *.so encoder decoder
+
