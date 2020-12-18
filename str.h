@@ -25,5 +25,9 @@ char* immutableFilter(const char* str);
 
 bool isNumber(const char* str);
 bool isLetters(const char* str);
+bool isUpperCase(const char ch);
+bool isLowerCase(const char ch);
+bool isAlpha(const char ch);
+bool isDigit(const char ch);
 
 #endif
