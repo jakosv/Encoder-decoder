@@ -9,7 +9,7 @@ void mutableCaesarEncode(char* str, int shift) {
     const size_t size = strlen(str);
 
     for (size_t i = 0; i < size; ++i) {
-        str[i] = ((str[i] + shift) % Mod + Mod) % Mod; 
+        str[i] = (str[i] + shift) % Mod; 
     }
 }
 
