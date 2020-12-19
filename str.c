@@ -70,7 +70,7 @@ char* immutableToLower(const char* str) {
 }
 
 void mutableStrip(char* str) {
-    const size_t size = strlen(str);
+    const int size = strlen(str);
     int startSpaces = 0;
     int endSpaces = 0;
 
@@ -91,13 +91,13 @@ void mutableStrip(char* str) {
         }
     }
 
-    size_t strNormalSize = size - startSpaces - endSpaces;
-    if (strNormalSize <= 0) {
+    int strNormalSize = size - startSpaces - endSpaces;
+    if (strNormalSize < 0) {
         // String consists only spaces
         strNormalSize = 0;
     }
 
-    for (int i = 0; i < strNormalSize; ++i) {
+    for (size_t i = 0; i < strNormalSize; ++i) {
         str[i] = str[startSpaces + i];
     }
     
