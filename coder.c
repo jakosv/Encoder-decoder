@@ -4,15 +4,15 @@
 #include "str.h"
 
 void mutableCaesarEncode(char* str, int shift) {
-    const size_t size = strlen(str);
+    const int size = strlen(str);
 
-    for (size_t i = 0; i < size; ++i) {
+    for (int i = 0; i < size; ++i) {
         str[i] = str[i] + shift; 
     }
 }
 
 char* immutableCaesarEncode(const char* str, int shift) {
-    const size_t size = strlen(str);
+    const int size = strlen(str);
     char* newStr = (char*) malloc(sizeof(char) * (size + 1));
     strcpy(newStr, str);
 
@@ -32,18 +32,18 @@ char* immutableCaesarDecode(const char* str, int shift) {
 
 
 void mutableXorEncode(char* str, const char* key) {
-    const size_t size = strlen(str);
-    const size_t keySize = strlen(key);
+    const int size = strlen(str);
+    const int keySize = strlen(key);
     int j = 0;
 
-    for (size_t i = 0; i < size; ++i) {
+    for (int i = 0; i < size; ++i) {
         str[i] = (char)(str[i] ^ key[j]);
         j = (j + 1) % keySize;
     }   
 }
 
 char* immutableXorEncode(const char* str, const char* key) {
-    const size_t size = strlen(str);
+    const int size = strlen(str);
     char* newStr = (char*) malloc(sizeof(char) * (size + 1));
     strcpy(newStr, str);
 

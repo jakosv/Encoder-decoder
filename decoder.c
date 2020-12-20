@@ -7,7 +7,7 @@
 
 int main(int argc, char** argv) {
     char type[10];
-    char text[100];
+    char* text;
     char* result;
     bool ok = false;
     if (argc == 4) {
@@ -35,7 +35,8 @@ int main(int argc, char** argv) {
         printf("Type (caesar/xor): ");
         scanf("%s", type);
         printf("Text: ");
-        scanf("%s", text);
+        char ch = fgetc(stdin);
+        text = inputString();
 
         if (strcmp(type, "caesar") == 0) {
             int offset;
@@ -51,6 +52,8 @@ int main(int argc, char** argv) {
             result = immutableXorDecode(text, password);
             ok = true;
         }
+
+        free(text);
     }
     
     if (ok == true) {

@@ -2,17 +2,18 @@
 #include <assert.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdio.h>
 #include "str.h"
 
 static const int Difference = ('a' - 'A');
 
 int stringToInt(const char* str) {
     int result = 0;
-    size_t size = strlen(str);
+    const int size = strlen(str);
     
     assert(isNumber(str));
 
-    size_t i = 0;
+    int i = 0;
     char sign = 0;
     if (size > 0 && str[0] == '-') {
         sign = 1;
@@ -30,9 +31,9 @@ int stringToInt(const char* str) {
 
 
 void mutableToUpper(char* str) {
-    size_t size = strlen(str);
+    const int size = strlen(str);
 
-    for (size_t i = 0; i < size; ++i) {
+    for (int i = 0; i < size; ++i) {
         if (isLowerCase(str[i])) {
             str[i] -= Difference;
         }
@@ -40,9 +41,9 @@ void mutableToUpper(char* str) {
 }
 
 void mutableToLower(char* str) {
-    size_t size = strlen(str);
+    const int size = strlen(str);
 
-    for (size_t i = 0; i < size; ++i) {
+    for (int i = 0; i < size; ++i) {
         if (isUpperCase(str[i])) {
             str[i] += Difference;
         }
@@ -50,7 +51,7 @@ void mutableToLower(char* str) {
 }
 
 char* immutableToUpper(const char* str) {
-    const size_t size = strlen(str);
+    const int size = strlen(str);
     char* newStr = (char*) malloc(sizeof(char) * (size + 1));
     strcpy(newStr, str);
 
@@ -60,7 +61,7 @@ char* immutableToUpper(const char* str) {
 }
 
 char* immutableToLower(const char* str) {
-    const size_t size = strlen(str);
+    const int size = strlen(str);
     char* newStr = (char*) malloc(sizeof(char) * (size + 1));
     strcpy(newStr, str);
     
@@ -74,7 +75,7 @@ void mutableStrip(char* str) {
     int startSpaces = 0;
     int endSpaces = 0;
 
-    for (size_t i = 0; i < size; ++i) {
+    for (int i = 0; i < size; ++i) {
         if (str[i] == ' ') {
             ++startSpaces;
         }
@@ -82,7 +83,7 @@ void mutableStrip(char* str) {
             break;
         }
     }
-    for (size_t i = size - 1; i >= 0; --i) {
+    for (int i = size - 1; i >= 0; --i) {
         if (str[i] == ' ') {
             ++endSpaces;
         }
@@ -97,7 +98,7 @@ void mutableStrip(char* str) {
         strNormalSize = 0;
     }
 
-    for (size_t i = 0; i < strNormalSize; ++i) {
+    for (int i = 0; i < strNormalSize; ++i) {
         str[i] = str[startSpaces + i];
     }
     
@@ -105,7 +106,7 @@ void mutableStrip(char* str) {
 }
 
 char* immutableStrip(const char* str) {
-    const size_t size = strlen(str);
+    const int size = strlen(str);
     char* newStr = (char*) malloc(sizeof(char) * (size + 1));
     strcpy(newStr, str);
 
@@ -116,10 +117,10 @@ char* immutableStrip(const char* str) {
 
 
 void mutableRemoveSpaces(char* str) {
-    size_t size = strlen(str); 
-    size_t k = 0;
+    const int size = strlen(str); 
+    int k = 0;
 
-    for (size_t i = 0; i < size; ++i) {
+    for (int i = 0; i < size; ++i) {
         if (str[i] != ' ') {
             str[k] = str[i];    
             ++k;
@@ -130,7 +131,7 @@ void mutableRemoveSpaces(char* str) {
 }
 
 char* immutableRemoveSpaces(const char* str) {
-    size_t size = strlen(str); 
+    const int size = strlen(str); 
     char* newStr = (char*) malloc(sizeof(char) * (size + 1));
     strcpy(newStr, str);
 
@@ -140,10 +141,10 @@ char* immutableRemoveSpaces(const char* str) {
 }
 
 void mutableFilter(char* str) {
-    const size_t size = strlen(str);
-    size_t k = 0;
+    const int size = strlen(str);
+    int k = 0;
 
-    for (size_t i = 0; i < size; ++i) {
+    for (int i = 0; i < size; ++i) {
         if (isLowerCase(str[i]) 
             || isUpperCase(str[i]) 
             || isDigit(str[i])
@@ -158,7 +159,7 @@ void mutableFilter(char* str) {
 }
 
 char* immutableFilter(const char* str) {
-    const size_t size = strlen(str);
+    const int size = strlen(str);
     char* newStr = (char*) malloc(sizeof(char) * (size + 1));
     strcpy(newStr, str);
 
@@ -169,9 +170,9 @@ char* immutableFilter(const char* str) {
 
 
 bool isNumber(const char* str) {
-    const size_t size = strlen(str);
+    const int size = strlen(str);
     
-    for (size_t i = 0; i < size; ++i) {
+    for (int i = 0; i < size; ++i) {
         if (!(isDigit(str[i]) || str[i] == '-')) {
             return false;
         }
@@ -181,9 +182,9 @@ bool isNumber(const char* str) {
 }
         
 bool isLetters(const char* str) {
-    const size_t size = strlen(str);
+    const int size = strlen(str);
 
-    for (size_t i = 0; i < size; ++i) {
+    for (int i = 0; i < size; ++i) {
         if (!(isAlpha(str[i]))) {
             return false;
         }
@@ -208,3 +209,24 @@ bool isDigit(const char ch) {
     return (ch >= '0' && ch <= '9');
 }
 
+char* inputString() {
+    int dim = 1;
+    int size = 0;
+    char* str = (char*) malloc(sizeof(char) * (dim + 1));
+    char ch = 0;
+    
+    ch = fgetc(stdin);
+    while (ch != '\n') {
+        str[size] = ch;
+        size++;
+        if (size >= dim) {
+            dim *= 2;
+            str = (char*) realloc(str, sizeof(char) * (dim + 1));
+        }
+        ch = fgetc(stdin);
+    } 
+    str = (char*) realloc(str, sizeof(char) * (size + 1));
+    str[size] = '\0';
+
+    return str;
+}

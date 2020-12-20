@@ -7,7 +7,7 @@
 
 int main(int argc, char** argv) {
     char type[10];
-    char text[100];
+    char* text;
     char* result;
     bool ok = false;
 
@@ -33,7 +33,8 @@ int main(int argc, char** argv) {
         printf("Type (caesar/xor): ");
         scanf("%s", type);
         printf("Text: ");
-        scanf("%s", text);
+        char ch = fgetc(stdin);
+        text = inputString();
         mutableStrip(text);
         mutableToLower(text);
         if (strcmp(type, "caesar") == 0) {
@@ -50,6 +51,8 @@ int main(int argc, char** argv) {
             result = immutableXorEncode(text, password);
             ok = true;
         }
+
+        free(text);
     }
 
     if (ok) {

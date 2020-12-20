@@ -30,4 +30,6 @@ bool isLowerCase(const char ch);
 bool isAlpha(const char ch);
 bool isDigit(const char ch);
 
+char* inputString();
+
 #endif
