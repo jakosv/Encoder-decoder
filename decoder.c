@@ -17,6 +17,8 @@ int main(int argc, char** argv) {
         argv[3] - param
         */
         strcpy(type, argv[1]);
+        int size = strlen(argv[2]);
+        text = (char*) malloc(sizeof(char) * (size + 1));
         strcpy(text, argv[2]);
 
         if (strcmp(type, "--caesar") == 0 && isNumber(argv[3])) {
@@ -30,6 +32,7 @@ int main(int argc, char** argv) {
             result = immutableXorDecode(text, password);
             ok = true;
         }
+        free(text);
     }
     else if (argc == 1) {   
         printf("Type (caesar/xor): ");

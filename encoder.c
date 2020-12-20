@@ -13,8 +13,7 @@ int main(int argc, char** argv) {
 
     if (argc == 4) {
         strcpy(type, argv[1]);
-        strcpy(text, argv[2]);
-        mutableStrip(text);
+        text = immutableStrip(argv[2]);
         mutableToLower(text);
 
         if (strcmp(type, "--caesar") == 0 && isNumber(argv[3])) {
@@ -28,6 +27,7 @@ int main(int argc, char** argv) {
             result = immutableXorEncode(text, password);
             ok = true;
         }
+        free(text);
     }
     else if (argc == 1) {   
         printf("Type (caesar/xor): ");
