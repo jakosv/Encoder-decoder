@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
         argv[3] - param
         */
         strcpy(type, argv[1]);
-        int size = strlen(argv[2]);
+        const int size = strlen(argv[2]);
         text = (char*) malloc(sizeof(char) * (size + 1));
         strcpy(text, argv[2]);
 
